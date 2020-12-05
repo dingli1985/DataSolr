@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+    username: audit30dev1
+    password: audit30dev1
+  data:
+    solr:
+      host: http://localhost:8983/solr
+  profiles:
+    active: std-column-mapping,ori-column-mapping
+restful:
+   url: http://localhost:8983/solr/co_audit_std/schema/fields
+solr-query:
+  cron: 0 */2 * * * ?
+  core: co_audit_std
+  #数据范围区分字段
+  rangeCol: rec_time
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
+
+target:
+  table:
+    prefix:
+      std: HNSTD_DEV_SESSION_
+      ori: HNORI_DEV_SESSION_
+# 日志
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+  file: ../log/data-solr.log
+
+sftp-upload:
+  user: cloudera
+  pwd: 56#byPac&*
+  host: 134.176.83.84
+  port: 22
+  root: /app/cloudera/csv
+  privateKey:
+  passphrase:
+
+
+
